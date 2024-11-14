@@ -5,6 +5,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/authOptions";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 const inter = Inter({ subsets: ["latin"] });
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,12 +19,18 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
+  const locale = await getLocale();
+  const messages = await getMessages();
 
   return (
-    <html lang="en">
-      <NextAuthProvider session={session}>
-        <body className={inter.className}>{children}</body>
-      </NextAuthProvider>
+    <html lang={locale}>
+      <body className={inter.className}>
+        <NextAuthProvider session={session}>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </NextAuthProvider>
+      </body>
     </html>
   );
 }
