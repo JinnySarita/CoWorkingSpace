@@ -104,6 +104,7 @@ export default function SignUpPage() {
                 label={t("email")}
                 type="email"
                 variant="outlined"
+                value={email} // Retain value when navigating back
                 onChange={(e) => setEmail(e.target.value)}
                 sx={{ width: "100%", marginTop: "16px" }}
               />
@@ -113,6 +114,7 @@ export default function SignUpPage() {
                 label={t("password")}
                 type={showPassword ? "text" : "password"}
                 variant="outlined"
+                value={password} // Retain value when navigating back
                 onChange={(e) => setPassword(e.target.value)}
                 sx={{ width: "100%", marginTop: "16px" }}
                 InputProps={{
@@ -131,6 +133,7 @@ export default function SignUpPage() {
                 label={t("confirm-password")}
                 type={showPassword ? "text" : "password"}
                 variant="outlined"
+                value={confirmPassword} // Retain value when navigating back
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 sx={{ width: "100%", marginTop: "16px" }}
                 InputProps={{
@@ -193,7 +196,7 @@ export default function SignUpPage() {
                   type="button"
                   sx={{ width: "50%", marginRight: "16px" }}
                   variant="outlined"
-                  onClick={() => setCurrentStep(1)}
+                  onClick={() => setCurrentStep(1)} // Navigate back
                 >
                   {t("back")}
                 </Button>
