@@ -44,6 +44,10 @@ export default function ReservationTable() {
     return <p>{error}</p>;
   }
 
+  if (data.length === 0) {
+    return <p>{t("no-reservations")}</p>;
+  }
+
   return (
     <Table>
       <TableHead className="bg-slate-100">

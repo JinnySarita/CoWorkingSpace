@@ -46,6 +46,7 @@
     "manage": {
       "title": "จัดการการจอง",
       "error_fetch": "ไม่สามารถดึงข้อมูลการจองได้",
+      "no-reservations": "ไม่พบการจอง",
       "table": {
         "co-working-space-name": "ชื่อพื้นที่ทำงาน",
         "no-of-rooms": "จำนวนห้อง",

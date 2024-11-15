@@ -46,6 +46,7 @@
     "manage": {
       "title": "Manage Reservations",
       "error_fetch": "Error fetching reservations",
+      "no-reservations": "No reservations found",
       "table": {
         "co-working-space-name": "Co-working Space Name",
         "no-of-rooms": "No. of Rooms",
