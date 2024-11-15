@@ -72,7 +72,14 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "100vh", // Equivalent to h-screen
+      }}
+    >
       <Card
         sx={{
           display: "flex",
@@ -243,6 +250,6 @@ export default function SignUpPage() {
           {error}
         </Alert>
       </Snackbar>
-    </div>
+    </Box>
   );
 }
