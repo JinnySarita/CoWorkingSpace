@@ -30,7 +30,7 @@ export default function page() {
         reservationDate!.format("YYYY-MM-DD"),
         numberOfRooms
       );
-      if (response.status !== 201) {
+      if (!response.success) {
         setError(t("error-creating-reservation"));
         return;
       }
