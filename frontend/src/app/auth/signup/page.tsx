@@ -27,6 +27,7 @@ export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1); // Track the step (1: Email/Password, 2: Complete Registration)
 
   const router = useRouter();
   const t = useTranslations("sign-up");
@@ -38,9 +39,7 @@ export default function SignUpPage() {
     setError(null);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleNextStep = () => {
     if (password.length < 6) {
       setError("Password must be at least 6 characters long.");
       setOpenSnackbar(true);
@@ -53,6 +52,11 @@ export default function SignUpPage() {
       return;
     }
 
+    setCurrentStep(2); // Move to the next step
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     try {
       const response = await register(name, email, tel, password);
       if (response.success) {
@@ -85,117 +89,139 @@ export default function SignUpPage() {
         }}
       >
         <form onSubmit={handleSubmit}>
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            <Typography gutterBottom variant="h4">
-              {t("sign-up")}
-            </Typography>
-            <Typography gutterBottom variant="h6">
-              {t("create-your-account")}
-            </Typography>
-          </Box>
-
-          <Box sx={{ marginTop: "32px" }}>
-            <TextField
-              required
-              id="name"
-              label={t("name")}
-              type="name"
-              variant="outlined"
-              onChange={(e) => setName(e.target.value)}
-              sx={{
-                width: "100%",
-              }}
-            />
-            <TextField
-              required
-              id="email"
-              label={t("email")}
-              type="email"
-              variant="outlined"
-              onChange={(e) => setEmail(e.target.value)}
-              sx={{
-                width: "100%",
-                marginTop: "16px",
-              }}
-            />
-            <TextField
-              required
-              id="tel"
-              label={t("tel")}
-              type="tel"
-              variant="outlined"
-              onChange={(e) => setTel(e.target.value)}
-              sx={{
-                width: "100%",
-                marginTop: "16px",
-              }}
-            />
-            <TextField
-              required
-              id="password"
-              label={t("password")}
-              type={showPassword ? "text" : "password"}
-              variant="outlined"
-              onChange={(e) => setPassword(e.target.value)}
-              sx={{
-                width: "100%",
-                marginTop: "16px",
-              }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleClickShowPassword} edge="end">
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <TextField
-              required
-              id="confirm-password"
-              label={t("confirm-password")}
-              type={showPassword ? "text" : "password"}
-              variant="outlined"
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              sx={{
-                width: "100%",
-                marginTop: "16px",
-              }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton onClick={handleClickShowPassword} edge="end">
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Box>
-
-          <Box sx={{ marginTop: "32px" }}>
-            <Button type="submit" variant="contained" sx={{ width: "100%" }}>
-              {t("sign-up")}
-            </Button>
-
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "16px",
-              }}
-            >
-              <Typography
-                variant="body1"
-                sx={{ textAlign: "center", color: "primary.main" }}
-              >
-                {t("have-account")}
+          {currentStep === 1 && (
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Typography gutterBottom variant="h4">
+                {t("sign-up")}
               </Typography>
-              <Link href="/auth/signin" sx={{ marginLeft: "8px" }}>
-                {t("sign-in")}
-              </Link>
+              <Typography gutterBottom variant="h6">
+                {t("create-your-account")}
+              </Typography>
+
+              <TextField
+                required
+                id="email"
+                label={t("email")}
+                type="email"
+                variant="outlined"
+                onChange={(e) => setEmail(e.target.value)}
+                sx={{ width: "100%", marginTop: "16px" }}
+              />
+              <TextField
+                required
+                id="password"
+                label={t("password")}
+                type={showPassword ? "text" : "password"}
+                variant="outlined"
+                onChange={(e) => setPassword(e.target.value)}
+                sx={{ width: "100%", marginTop: "16px" }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleClickShowPassword} edge="end">
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <TextField
+                required
+                id="confirm-password"
+                label={t("confirm-password")}
+                type={showPassword ? "text" : "password"}
+                variant="outlined"
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                sx={{ width: "100%", marginTop: "16px" }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleClickShowPassword} edge="end">
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+
+              <Button
+                type="button"
+                variant="contained"
+                sx={{ width: "100%", marginTop: "32px" }}
+                onClick={handleNextStep}
+              >
+                {t("next")}
+              </Button>
             </Box>
+          )}
+
+          {currentStep === 2 && (
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <Typography gutterBottom variant="h4">
+                {t("sign-up")}
+              </Typography>
+              <Typography gutterBottom variant="h6">
+                {t("create-your-account")}
+              </Typography>
+
+              <TextField
+                required
+                id="name"
+                label={t("name")}
+                type="name"
+                variant="outlined"
+                onChange={(e) => setName(e.target.value)}
+                sx={{ width: "100%", marginTop: "16px" }}
+              />
+              <TextField
+                required
+                id="tel"
+                label={t("tel")}
+                type="tel"
+                variant="outlined"
+                onChange={(e) => setTel(e.target.value)}
+                sx={{ width: "100%", marginTop: "16px" }}
+              />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  marginTop: "32px",
+                }}
+              >
+                <Button
+                  type="button"
+                  sx={{ width: "50%", marginRight: "16px" }}
+                  variant="outlined"
+                  onClick={() => setCurrentStep(1)}
+                >
+                  {t("back")}
+                </Button>
+
+                <Button type="submit" variant="contained" sx={{ width: "50%" }}>
+                  {t("sign-up")}
+                </Button>
+              </Box>
+            </Box>
+          )}
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "16px",
+            }}
+          >
+            <Typography
+              variant="body1"
+              sx={{ textAlign: "center", color: "primary.main" }}
+            >
+              {t("have-account")}
+            </Typography>
+
+            <Link href="/auth/signin" sx={{ marginLeft: "8px" }}>
+              {t("sign-in")}
+            </Link>
           </Box>
         </form>
       </Card>
