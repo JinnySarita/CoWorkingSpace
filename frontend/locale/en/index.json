@@ -20,5 +20,27 @@
         "description": "Reserve a spot in the co-working space."
       }
     }
+  },
+  "sign-in":{
+    "sign-in": "Sign In",
+    "to-make-reservations":"To make reservations",
+    "email": "Email",
+    "password": "Password",
+    "don't-have-account": "Don’t have an account?",
+    "sign-up": "Sign Up"
+  },
+  "sign-up":{
+    "sign-in": "Sign In",
+    "create-your-account":"Create your account",
+    "name": "Name",
+    "email": "Email",
+    "tel" : "Tel",
+    "password": "Password",
+    "confirm-password": "Confirm Password",
+    "have-account": "Already have an account?",
+    "sign-up": "Sign Up",
+    "back": "Back",
+    "next": "Next"
   }
+
 }

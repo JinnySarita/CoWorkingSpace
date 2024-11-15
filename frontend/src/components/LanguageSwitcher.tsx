@@ -6,7 +6,7 @@ const LanguageSwitcher = ({ className }: { className: string }) => {
   const router = useRouter();
 
   const changeLanguage = (locale: string) => {
-    document.cookie = `locale=${locale}`;
+    document.cookie = `locale=${locale}; path=/;`;
     router.refresh();
   };
 
