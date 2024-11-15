@@ -14,10 +14,12 @@ import {
 } from "@mui/material";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useRouter } from "next/navigation";
 
 export default function NavBar() {
   const session = useSession();
   const t = useTranslations("navbar");
+  const router = useRouter();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -32,7 +34,12 @@ export default function NavBar() {
   return (
     <AppBar position="sticky" color="inherit">
       <Toolbar>
-        <Typography variant="h6" color="primary">
+        <Typography
+          className="cursor-pointer"
+          variant="h6"
+          color="primary"
+          onClick={() => router.push("/")}
+        >
           Co Working Space
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
