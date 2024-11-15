@@ -4,5 +4,14 @@
     "reservation": "การจอง",
     "sign-in": "เข้าสู่ระบบ",
     "sign-out": "ออกจากระบบ"
+  },
+  "sign-in":{
+    "sign-in": "เข้าสู่ระบบ",
+    "to-make-reservations": "เพื่อทำการจอง",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "don't-have-account": "ไม่มีบัญชีผู้ใช้",
+    "sign-up": "ลงทะเบียน"
+
   }
 }

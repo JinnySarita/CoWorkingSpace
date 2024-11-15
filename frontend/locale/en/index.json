@@ -4,5 +4,15 @@
     "reservation": "Reservation",
     "sign-in": "Sign In",
     "sign-out": "Sign Out"
+  },
+  "sign-in":{
+    "sign-in": "Sign In",
+    "to-make-reservations":"To make reservations",
+    "email": "Email",
+    "password": "Password",
+    "don't-have-account": "Don’t have an account?",
+    "sign-up": "Sign Up"
+
   }
+
 }
