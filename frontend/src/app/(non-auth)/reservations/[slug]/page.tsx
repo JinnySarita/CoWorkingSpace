@@ -1,9 +1,11 @@
 "use client";
 
 import ReservationForm from "@/components/create_edit_reservation/ReservationForm";
+import deleteReservation from "@/libs/deleteReservation";
 import getReservation from "@/libs/getReservation";
 import putReservation from "@/libs/putReservation";
-import { Alert, Snackbar, Typography } from "@mui/material";
+import { Delete } from "@mui/icons-material";
+import { Alert, Button, Snackbar, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
@@ -73,6 +75,16 @@ export default function Page({
     }
   }
 
+  async function handleDelete() {
+    try {
+      const id = (await params).slug;
+      await deleteReservation(session.data?.user.token!, id);
+      router.push(`/reservations`);
+    } catch (error) {
+      setError(t("error-deleting-reservation"));
+    }
+  }
+
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
@@ -84,7 +96,17 @@ export default function Page({
   return (
     reservation && (
       <div className="flex flex-col gap-8">
-        <Typography variant="h4">{t("edit-title")}</Typography>
+        <div className="flex flex-row justify-between">
+          <Typography variant="h4">{t("edit-title")}</Typography>
+          <Button
+            variant="contained"
+            color="error"
+            endIcon={<Delete />}
+            onClick={handleDelete}
+          >
+            {t("delete")}
+          </Button>
+        </div>
         <Typography variant="h5">{t("edit-description")}</Typography>
         <ReservationForm
           onSubmit={handleSubmit}
