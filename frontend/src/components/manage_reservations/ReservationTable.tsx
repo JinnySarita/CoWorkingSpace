@@ -29,7 +29,7 @@ export default function ReservationTable() {
         setData(reservations);
       } catch (error) {
         setLoading(false);
-        setError(t("fetch_error"));
+        setError(t("error_fetch"));
       }
     }
 
