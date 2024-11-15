@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { redirect, RedirectType } from "next/navigation";
+import { redirect } from "next/navigation";
 
 export default async function layout({
   children,
@@ -9,7 +9,7 @@ export default async function layout({
   const session = await getServerSession();
 
   if (!session) {
-    redirect("/auth/signin?callbackUrl=/reservations/create");
+    redirect("/auth/signin");
   }
 
   return children;
