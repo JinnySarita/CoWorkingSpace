@@ -41,6 +41,21 @@
     "sign-up": "Sign Up",
     "back": "Back",
     "next": "Next"
-  }
+  },
+  "reservations": {
+    "manage": {
+      "title": "Manage Reservations",
+      "error_fetch": "Error fetching reservations",
+      "table": {
+        "co-working-space-name": "Co-working Space Name",
+        "no-of-rooms": "No. of Rooms",
+        "user-name": "User Name",
+        "reserved-date": "Reserved Date",
+        "reserved-at": "Reserved At"
+      }
+    },
+    "form": {
 
+    }
+  }
 }
