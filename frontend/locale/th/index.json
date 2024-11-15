@@ -65,7 +65,10 @@
       "no-of-rooms-label": "จำนวนห้อง",
       "reserved-date-label": "วันที่จอง",
       "submit": "ยืนยัน",
-      "error-creating-reservation": "เกิดข้อผิดพลาดในการสร้างการจอง"
+      "error-creating-reservation": "เกิดข้อผิดพลาดในการสร้างการจอง",
+      "error-updating-reservation": "เกิดข้อผิดพลาดในการแก้ไขการจอง",
+      "delete": "ลบ",
+      "error-deleting-reservation": "เกิดข้อผิดพลาดในการลบการจอง"
     }
   }
 }

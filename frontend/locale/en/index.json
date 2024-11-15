@@ -65,7 +65,10 @@
       "no-of-rooms-label": "No. of Rooms",
       "reserved-date-label": "Reservation Date",
       "submit": "Confirm",
-      "error-creating-reservation": "Unable to create reservation"
+      "error-creating-reservation": "Unable to create reservation",
+      "error-updating-reservation": "Unable to update reservation",
+      "delete": "Delete",
+      "error-deleting-reservation": "Unable to delete reservation"
     }
   }
 }
