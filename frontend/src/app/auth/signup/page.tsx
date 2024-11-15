@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import register from "@/libs/register";
 import * as React from "react";
 import {
   Box,
@@ -15,23 +16,42 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useTranslations } from "next-intl";
 
-export default function SignInPage() {
+export default function SignUpPage() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const t = useTranslations("sign-in");
+  const router = useRouter();
+
+  const t = useTranslations("sign-up");
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await signIn("credentials", {
-      email,
-      password,
-      redirect: true,
-      callbackUrl: "/",
-    });
+    if (password.length < 6) {
+      alert("Password must be at least 6 characters long.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    try {
+      const response = await register(name, email, tel, password);
+      if (response.success) {
+        router.push("/auth/signin");
+      } else {
+        alert("Error: " + response.message || "Unable to register.");
+      }
+    } catch (error) {
+      console.error("Registration failed:", error);
+    }
   };
 
   return (
@@ -54,14 +74,25 @@ export default function SignInPage() {
         <form onSubmit={handleSubmit}>
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <Typography gutterBottom variant="h4">
-              {t("sign-in")}
+              {t("sign-up")}
             </Typography>
             <Typography gutterBottom variant="h6">
-              {t("to-make-reservations")}
+              {t("create-your-account")}
             </Typography>
           </Box>
 
           <Box sx={{ marginTop: "32px" }}>
+            <TextField
+              required
+              id="name"
+              label={t("name")}
+              type="name"
+              variant="outlined"
+              onChange={(e) => setName(e.target.value)}
+              sx={{
+                width: "100%",
+              }}
+            />
             <TextField
               required
               id="email"
@@ -71,8 +102,22 @@ export default function SignInPage() {
               onChange={(e) => setEmail(e.target.value)}
               sx={{
                 width: "100%",
+                marginTop: "16px",
               }}
             />
+            <TextField
+              required
+              id="tel"
+              label={t("tel")}
+              type="tel"
+              variant="outlined"
+              onChange={(e) => setTel(e.target.value)}
+              sx={{
+                width: "100%",
+                marginTop: "16px",
+              }}
+            />
+
             <TextField
               required
               id="password"
@@ -94,10 +139,31 @@ export default function SignInPage() {
                 ),
               }}
             />
+            <TextField
+              required
+              id="confirm-password"
+              label={t("confirm-password")}
+              type={showPassword ? "text" : "password"}
+              variant="outlined"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              sx={{
+                width: "100%",
+                marginTop: "16px",
+              }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton onClick={handleClickShowPassword} edge="end">
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
           </Box>
           <Box sx={{ marginTop: "32px" }}>
             <Button type="submit" variant="contained" sx={{ width: "100%" }}>
-              {t("sign-in")}
+              {t("sign-up")}
             </Button>
 
             <Box
@@ -111,11 +177,11 @@ export default function SignInPage() {
                 variant="body1"
                 sx={{ textAlign: "center", color: "primary.main" }}
               >
-                {t("don't-have-account")}
+                {t("have-account")}
               </Typography>
 
-              <Link href="/auth/signup" sx={{ marginLeft: "8px" }}>
-                {t("sign-up")}
+              <Link href="/auth/signin" sx={{ marginLeft: "8px" }}>
+                {t("sign-in")}
               </Link>
             </Box>
           </Box>

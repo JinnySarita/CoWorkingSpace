@@ -12,6 +12,16 @@
     "password": "รหัสผ่าน",
     "don't-have-account": "ไม่มีบัญชีผู้ใช้",
     "sign-up": "ลงทะเบียน"
-
+  },
+  "sign-up":{
+    "sign-in": "เข้าสู่ระบบ",
+    "create-your-account": "สร้างบัญชีผู้ใช้",
+    "name": "ชื่อ",
+    "email": "อีเมล",
+    "tel" : "เบอร์โทรศัพท์",
+    "password": "รหัสผ่าน",
+    "confirm-password":"ยืนยันรหัสผ่าน",
+    "have-account": "มีบัญชีผู้ใช้แล้ว",
+    "sign-up": "ลงทะเบียน"
   }
 }
