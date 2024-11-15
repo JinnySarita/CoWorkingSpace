@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 const LanguageSwitcher = () => {
@@ -11,22 +11,15 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div>
-      <Button
-        variant="text"
-        color="inherit"
-        onClick={() => changeLanguage("en")}
-      >
-        English
+    <ButtonGroup variant="text" color="inherit">
+      <Button color="inherit" onClick={() => changeLanguage("en")}>
+        EN
       </Button>
-      <Button
-        variant="text"
-        color="inherit"
-        onClick={() => changeLanguage("th")}
-      >
+
+      <Button color="inherit" onClick={() => changeLanguage("th")}>
         ไทย
       </Button>
-    </div>
+    </ButtonGroup>
   );
 };
 
