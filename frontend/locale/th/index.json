@@ -25,5 +25,21 @@
     "sign-up": "ลงทะเบียน",
     "back": "ย้อนกลับ",
     "next": "ถัดไป"
+  },
+  "homepage": {
+    "banner": {
+      "title": "Co-working Space",
+      "description": "พื้นที่ทำงานสำหรับทุกคน"
+    },
+    "menu-card": {
+      "explore": {
+        "title": "สำรวจ",
+        "description": "สำรวจพื้นที่ทำงานร่วมและค้นหาสถานที่ทำงานที่เหมาะกับคุณ"
+      },
+      "reserve": {
+        "title": "จองเลย",
+        "description": "จองพื้นที่ทำงานที่คุณต้องการ"
+      }
+    }
   }
 }
