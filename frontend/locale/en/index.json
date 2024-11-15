@@ -64,7 +64,8 @@
       "co-working-space-label": "Co-working Space",
       "no-of-rooms-label": "No. of Rooms",
       "reserved-date-label": "Reservation Date",
-      "submit": "Confirm"
+      "submit": "Confirm",
+      "error-creating-reservation": "Unable to create reservation"
     }
   }
 }

@@ -64,7 +64,8 @@
       "co-working-space-label": "พื้นที่ทำงาน",
       "no-of-rooms-label": "จำนวนห้อง",
       "reserved-date-label": "วันที่จอง",
-      "submit": "ยืนยัน"
+      "submit": "ยืนยัน",
+      "error-creating-reservation": "เกิดข้อผิดพลาดในการสร้างการจอง"
     }
   }
 }

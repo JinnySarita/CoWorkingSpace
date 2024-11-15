@@ -2,11 +2,12 @@
 
 import ReservationForm from "@/components/create_edit_reservation/ReservationForm";
 import postReservation from "@/libs/postReservation";
-import { Typography } from "@mui/material";
+import { Alert, Snackbar, Typography } from "@mui/material";
 import { Dayjs } from "dayjs";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function page() {
   const t = useTranslations("reservations.form");
@@ -29,17 +30,42 @@ export default function page() {
         reservationDate!.format("YYYY-MM-DD"),
         numberOfRooms
       );
+      if (response.status !== 201) {
+        setError(t("error-creating-reservation"));
+        return;
+      }
       router.push(`/reservations`);
     } catch (error) {
-      console.error(error);
+      setError(t("error-creating-reservation"));
     }
   }
+
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  const setError = (message: string) => {
+    setSnackbarMessage(message);
+    setSnackbarOpen(true);
+  };
 
   return (
     <div className="flex flex-col gap-8">
       <Typography variant="h4">{t("create-title")}</Typography>
       <Typography variant="h5">{t("create-description")}</Typography>
       <ReservationForm onSubmit={handleSubmit} />
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
