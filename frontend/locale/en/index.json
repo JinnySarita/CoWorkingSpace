@@ -1,3 +1,8 @@
 {
-  "test": "This is a test"
+  "navbar": {
+    "co-working-space": "Co-working Space",
+    "reservation": "Reservation",
+    "sign-in": "Sign In",
+    "sign-out": "Sign Out"
+  }
 }
