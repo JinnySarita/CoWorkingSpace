@@ -4,5 +4,21 @@
     "reservation": "Reservation",
     "sign-in": "Sign In",
     "sign-out": "Sign Out"
+  },
+  "homepage": {
+    "banner": {
+      "title": "Co-working Space",
+      "description": "A place where you can work, meet, and collaborate with other people."
+    },
+    "menu-card": {
+      "explore": {
+        "title": "Explore",
+        "description": "Discover the co-working space and its facilities."
+      },
+      "reserve": {
+        "title": "Reserve Now",
+        "description": "Reserve a spot in the co-working space."
+      }
+    }
   }
 }
