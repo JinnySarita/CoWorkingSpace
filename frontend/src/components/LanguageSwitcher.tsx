@@ -2,7 +2,7 @@
 import { Button, ButtonGroup } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-const LanguageSwitcher = () => {
+const LanguageSwitcher = ({ className }: { className: string }) => {
   const router = useRouter();
 
   const changeLanguage = (locale: string) => {
@@ -11,7 +11,7 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <ButtonGroup variant="text" color="inherit">
+    <ButtonGroup variant="text" color="inherit" className={className}>
       <Button color="inherit" onClick={() => changeLanguage("en")}>
         EN
       </Button>
