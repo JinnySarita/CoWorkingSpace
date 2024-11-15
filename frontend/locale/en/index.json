@@ -57,7 +57,14 @@
       }
     },
     "form": {
-
+      "create-title": "Create Reservation",
+      "create-description": "Enter the details of your reservation",
+      "edit-title": "Edit Reservation",
+      "edit-description": "Edit the details of your reservation",
+      "co-working-space-label": "Co-working Space",
+      "no-of-rooms-label": "No. of Rooms",
+      "reserved-date-label": "Reservation Date",
+      "submit": "Confirm"
     }
   }
 }
