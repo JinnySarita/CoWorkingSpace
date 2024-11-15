@@ -30,7 +30,7 @@ export default function NavBar() {
   };
 
   return (
-    <AppBar position="sticky" color="transparent">
+    <AppBar position="sticky" color="inherit">
       <Toolbar>
         <Typography variant="h6" color="primary">
           Co Working Space
