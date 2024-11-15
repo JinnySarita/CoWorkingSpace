@@ -12,6 +12,8 @@ import {
   Card,
   Button,
   Link,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useTranslations } from "next-intl";
@@ -23,22 +25,31 @@ export default function SignUpPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const router = useRouter();
-
   const t = useTranslations("sign-up");
 
   const handleClickShowPassword = () => setShowPassword((prev) => !prev);
 
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+    setError(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (password.length < 6) {
-      alert("Password must be at least 6 characters long.");
+      setError("Password must be at least 6 characters long.");
+      setOpenSnackbar(true);
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      setError("Passwords do not match.");
+      setOpenSnackbar(true);
       return;
     }
 
@@ -47,15 +58,17 @@ export default function SignUpPage() {
       if (response.success) {
         router.push("/auth/signin");
       } else {
-        alert("Error: " + response.message || "Unable to register.");
+        setError(response.message || "Unable to register.");
+        setOpenSnackbar(true);
       }
     } catch (error) {
-      console.error("Registration failed:", error);
+      setError("An unexpected error occurred.");
+      setOpenSnackbar(true);
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen ">
+    <div className="flex items-center justify-center h-screen">
       <Card
         sx={{
           display: "flex",
@@ -117,7 +130,6 @@ export default function SignUpPage() {
                 marginTop: "16px",
               }}
             />
-
             <TextField
               required
               id="password"
@@ -161,6 +173,7 @@ export default function SignUpPage() {
               }}
             />
           </Box>
+
           <Box sx={{ marginTop: "32px" }}>
             <Button type="submit" variant="contained" sx={{ width: "100%" }}>
               {t("sign-up")}
@@ -179,7 +192,6 @@ export default function SignUpPage() {
               >
                 {t("have-account")}
               </Typography>
-
               <Link href="/auth/signin" sx={{ marginLeft: "8px" }}>
                 {t("sign-in")}
               </Link>
@@ -187,6 +199,21 @@ export default function SignUpPage() {
           </Box>
         </form>
       </Card>
+
+      {/* Snackbar for error messages */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          {error}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
