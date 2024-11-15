@@ -18,7 +18,7 @@ export default function Home() {
           title={t("reserve.title")}
           description={t("reserve.description")}
           imgURL={"/menu.webp"}
-          to={"/reservations"}
+          to={"/reservations/create"}
         />
       </div>
     </div>
