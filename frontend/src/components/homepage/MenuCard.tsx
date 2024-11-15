@@ -23,11 +23,11 @@ export default function MenuCard({
     >
       <Image
         src={imgURL}
-        alt="Banner"
-        layout="fill"
-        objectFit="cover"
-        quality={100}
-        className="z-0"
+        alt="Menu"
+        fill
+        priority
+        className="z-0 object-cover"
+        sizes="100"
       />
 
       <div className="absolute inset-0 bg-slate-700/70 z-10"></div>

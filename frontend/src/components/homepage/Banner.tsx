@@ -10,10 +10,10 @@ export default function Banner() {
       <Image
         src="/banner.webp"
         alt="Banner"
-        layout="fill"
-        objectFit="cover"
-        quality={100}
-        className="z-0"
+        fill
+        priority
+        className="z-0 object-cover"
+        sizes="100"
       />
 
       <div className="absolute inset-0 bg-black/40 z-10"></div>
