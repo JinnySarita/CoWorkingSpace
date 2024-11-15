@@ -41,5 +41,23 @@
         "description": "จองพื้นที่ทำงานที่คุณต้องการ"
       }
     }
+  },
+  "reservations": {
+    "manage": {
+      "title": "จัดการการจอง",
+      "create-btn": "สร้างการจองของคุณ",
+      "error_fetch": "ไม่สามารถดึงข้อมูลการจองได้",
+      "no-reservations": "ไม่พบการจอง",
+      "table": {
+        "co-working-space-name": "ชื่อพื้นที่ทำงาน",
+        "no-of-rooms": "จำนวนห้อง",
+        "user-name": "ชื่อผู้จอง",
+        "reserved-date": "วันที่จอง",
+        "reserved-at": "จองเมื่อ"
+      }
+    },
+    "form": {
+
+    }
   }
 }
