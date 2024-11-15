@@ -45,6 +45,7 @@
   "reservations": {
     "manage": {
       "title": "จัดการการจอง",
+      "create-btn": "สร้างการจองของคุณ",
       "error_fetch": "ไม่สามารถดึงข้อมูลการจองได้",
       "no-reservations": "ไม่พบการจอง",
       "table": {

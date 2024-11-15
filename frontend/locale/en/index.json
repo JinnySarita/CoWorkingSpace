@@ -45,6 +45,7 @@
   "reservations": {
     "manage": {
       "title": "Manage Reservations",
+      "create-btn": "Create Your Reservation",
       "error_fetch": "Error fetching reservations",
       "no-reservations": "No reservations found",
       "table": {
