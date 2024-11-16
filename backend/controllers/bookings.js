@@ -1,7 +1,7 @@
 const Booking = require("../models/Booking");
 const Coworkingspace = require("../models/Coworkingspace");
 const User = require("../models/User");
-const { sendMail } = require("./mails");
+// const { sendMail } = require("./mails");
 
 //@desc     Get all bookings
 //@route    GET /api/v1/bookings
@@ -127,13 +127,13 @@ exports.addBooking = async (req, res, next) => {
       data: booking,
     });
 
-    User.findById(req.user.id, function (err, user) {
-      if (err) {
-        console.log(err);
-      } else {
-        sendMail(user, booking);
-      }
-    });
+    // User.findById(req.user.id, function (err, user) {
+    //   if (err) {
+    //     console.log(err);
+    //   } else {
+    //     sendMail(user, booking);
+    //   }
+    // });
   } catch (error) {
     console.log(error);
     return res.status(500).json({

@@ -1,5 +1,3 @@
-import { ReservationItem } from "@/components/manage_reservations/ReservationTableRows";
-
 export default async function getReservations(token: string) {
   try {
     const response = await fetch(
