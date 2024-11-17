@@ -1,19 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
 import getCoWorkingSpaces from "@/libs/getCoWorkingSpaces";
-import SpaceCard from "../../../components/space/SpaceCard";
-import {
-  CircularProgress,
-  Box,
-  Pagination,
-  Typography,
-  Button,
-} from "@mui/material";
+import { CircularProgress, Box, Typography, Button } from "@mui/material";
 import getUserProfile from "@/libs/getUserProfile";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { SessionInterface } from "../../../../interface";
+import SpaceList from "@/components/space/spaceList";
+import PaginationControl from "@/components/space/PaginationControl";
 
 type Space = {
   id: string;
@@ -27,7 +22,7 @@ export default function Spaces() {
   const [loading, setLoading] = useState(true);
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [userRole, setUserRole] = useState<string | null>(null); // State to hold user role
+  const [userRole, setUserRole] = useState<string | null>(null);
   const { data, status }: { data: SessionInterface | null; status: string } =
     useSession();
 
@@ -55,11 +50,10 @@ export default function Spaces() {
       }
     };
 
-    // Fetch user profile and role only if session is available
     const fetchUserProfile = async (token: string) => {
       try {
-        const userProfile = await getUserProfile(token); // Fetch user profile using the token
-        setUserRole(userProfile.data.role); // Set the role to the state
+        const userProfile = await getUserProfile(token);
+        setUserRole(userProfile.data.role);
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
       }
@@ -130,7 +124,6 @@ export default function Spaces() {
       >
         <Typography variant="h4">{t("Explore-Co-Working-Spaces")}</Typography>
 
-        {/* Conditionally render the button for 'admin' role */}
         {userRole === "admin" && (
           <Button
             variant="contained"
@@ -141,35 +134,12 @@ export default function Spaces() {
           </Button>
         )}
       </Box>
-
-      {/* Space Cards */}
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "32px",
-          justifyContent: "center",
-          marginBottom: "32px",
-        }}
-      >
-        {displayedSpaces.map((space) => (
-          <SpaceCard
-            key={space.id}
-            imgUrl={space.picture}
-            title={space.name}
-            detail={`${space.address}`}
-            tel={space.tel}
-          />
-        ))}
-      </Box>
-
-      {/* Pagination */}
-      <Pagination
-        count={totalPages}
-        page={currentPage}
-        onChange={handlePageChange}
-        color="primary"
-      />
+      <SpaceList spaces={displayedSpaces} />
+      <PaginationControl
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={handlePageChange}
+      />{" "}
     </Box>
   );
 }
