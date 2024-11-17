@@ -30,21 +30,11 @@ export default function Spaces() {
   const { data, status }: { data: SessionInterface | null; status: string } =
     useSession();
 
-  let session: SessionInterface | null = null;
-
-  if (status === "authenticated" && data) {
-    const { user } = data;
-    console.log(user);
-  } else {
-    console.log("Session is loading or invalid.");
-  }
+  const t = useTranslations("spaces.explore");
 
   const spacesPerPage = 8;
 
-  const t = useTranslations("spaces.explore");
-
   useEffect(() => {
-    // Fetch co-working spaces data
     const fetchSpaces = async () => {
       try {
         const response = await getCoWorkingSpaces();
@@ -64,20 +54,24 @@ export default function Spaces() {
       }
     };
 
-    // Fetch user profile and role
-    const fetchUserProfile = async () => {
+    // Fetch user profile and role only if session is available
+    const fetchUserProfile = async (token: string) => {
       try {
-        const userProfile = await getUserProfile(session.user.token); // Assuming this function fetches user profile with role
+        const userProfile = await getUserProfile(token); // Fetch user profile using the token
         setUserRole(userProfile.data.role); // Set the role to the state
-        console.log("user profile", session);
       } catch (error) {
         console.error("Failed to fetch user profile:", error);
       }
     };
 
-    fetchSpaces();
-    fetchUserProfile();
-  }, []);
+    // Fetch user data if session is authenticated
+    if (status === "authenticated" && data) {
+      const { user } = data;
+      fetchUserProfile(user.token); // Pass token to fetch user profile
+    }
+
+    fetchSpaces(); // Fetch spaces on load
+  }, [data, status]); // Dependency array ensures effect runs when session status/data changes
 
   if (loading) {
     return (
@@ -134,12 +128,10 @@ export default function Spaces() {
         <Typography variant="h4">{t("Explore-Co-Working-Spaces")}</Typography>
 
         {/* Conditionally render the button for 'admin' role */}
-        {userRole === "admin" ? (
+        {userRole === "admin" && (
           <Button variant="contained" color="primary">
             + {t("Create Co-working Space")}
           </Button>
-        ) : (
-          ""
         )}
       </Box>
 
