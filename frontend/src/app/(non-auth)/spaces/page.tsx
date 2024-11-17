@@ -12,6 +12,7 @@ import {
 import getUserProfile from "@/libs/getUserProfile";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { SessionInterface } from "../../../../interface";
 
 type Space = {
@@ -32,7 +33,7 @@ export default function Spaces() {
 
   const t = useTranslations("spaces.explore");
 
-  const spacesPerPage = 8;
+  const router = useRouter();
 
   useEffect(() => {
     const fetchSpaces = async () => {
@@ -88,6 +89,8 @@ export default function Spaces() {
     );
   }
 
+  const spacesPerPage = 8;
+
   // Calculate the total number of pages
   const totalPages = Math.ceil(spaces.length / spacesPerPage);
 
@@ -129,7 +132,11 @@ export default function Spaces() {
 
         {/* Conditionally render the button for 'admin' role */}
         {userRole === "admin" && (
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => router.push("/spaces/create")}
+          >
             + {t("Create Co-working Space")}
           </Button>
         )}
