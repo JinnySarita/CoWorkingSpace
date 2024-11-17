@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { SessionInterface } from "../../../../interface";
-import SpaceList from "@/components/space/spaceList";
+import SpaceList from "@/components/space/SpaceList";
 import PaginationControl from "@/components/space/PaginationControl";
 
 type Space = {
