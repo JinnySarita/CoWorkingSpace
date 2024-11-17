@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import getUserProfile from "@/libs/getUserProfile";
 import { useTranslations } from "next-intl";
+import { useSession } from "next-auth/react";
+import { SessionInterface } from "../../../../interface";
 
 type Space = {
   id: string;
@@ -20,16 +22,30 @@ type Space = {
   picture: string;
 };
 
-export default async function Spaces() {
+export default function Spaces() {
   const [loading, setLoading] = useState(true);
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [userRole, setUserRole] = useState<string | null>(null); // State to hold user role
+  const { data, status }: { data: SessionInterface | null; status: string } =
+    useSession();
+
+  let session: SessionInterface | null = null;
+
+  if (status === "authenticated" && data) {
+    const { user } = data;
+    console.log(user);
+  } else {
+    console.log("Session is loading or invalid.");
+  }
+
   const spacesPerPage = 8;
 
   const t = useTranslations("spaces.explore");
 
   useEffect(() => {
-    const fetchData = async () => {
+    // Fetch co-working spaces data
+    const fetchSpaces = async () => {
       try {
         const response = await getCoWorkingSpaces();
         setSpaces(
@@ -48,7 +64,19 @@ export default async function Spaces() {
       }
     };
 
-    fetchData();
+    // Fetch user profile and role
+    const fetchUserProfile = async () => {
+      try {
+        const userProfile = await getUserProfile(session.user.token); // Assuming this function fetches user profile with role
+        setUserRole(userProfile.data.role); // Set the role to the state
+        console.log("user profile", session);
+      } catch (error) {
+        console.error("Failed to fetch user profile:", error);
+      }
+    };
+
+    fetchSpaces();
+    fetchUserProfile();
   }, []);
 
   if (loading) {
@@ -86,7 +114,6 @@ export default async function Spaces() {
     <Box
       sx={{
         display: "flex",
-        // flexWrap: "wrap",
         flexDirection: "column",
         gap: "16px",
         justifyContent: "center",
@@ -99,16 +126,23 @@ export default async function Spaces() {
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          alignItems: "center", // Vertically center the items
+          alignItems: "center",
           width: "100%",
           marginBottom: "32px",
         }}
       >
         <Typography variant="h4">{t("Explore-Co-Working-Spaces")}</Typography>
-        <Button variant="contained" color="primary">
-          + {t("Create Co-working Space")}
-        </Button>
+
+        {/* Conditionally render the button for 'admin' role */}
+        {userRole === "admin" ? (
+          <Button variant="contained" color="primary">
+            + {t("Create Co-working Space")}
+          </Button>
+        ) : (
+          ""
+        )}
       </Box>
+
       {/* Space Cards */}
       <Box
         sx={{
