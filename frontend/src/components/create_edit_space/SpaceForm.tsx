@@ -134,7 +134,7 @@ export default function SpaceForm({
 
       <Box sx={{ display: "flex", flexDirection: "column", gap: "16px" }}>
         <TextField
-          label="Name"
+          label={t("Name")}
           variant="outlined"
           fullWidth
           value={name}
@@ -143,7 +143,7 @@ export default function SpaceForm({
           helperText={errors.name}
         />
         <TextField
-          label="Picture URL"
+          label={t("Picture-URL")}
           variant="outlined"
           fullWidth
           value={pictureUrl}
@@ -152,7 +152,7 @@ export default function SpaceForm({
           helperText={errors.pictureUrl}
         />
         <TextField
-          label="Address"
+          label={t("Address")}
           variant="outlined"
           fullWidth
           value={address}
@@ -163,7 +163,7 @@ export default function SpaceForm({
           helperText={errors.address ? errors.address : `${address.length}/100`}
         />
         <TextField
-          label="Province"
+          label={t("Province")}
           variant="outlined"
           fullWidth
           value={province}
@@ -172,7 +172,7 @@ export default function SpaceForm({
           helperText={errors.province}
         />
         <TextField
-          label="Postal Code"
+          label={t("Postal-Code")}
           variant="outlined"
           fullWidth
           value={postalCode}
@@ -183,7 +183,7 @@ export default function SpaceForm({
           helperText={errors.postalCode}
         />
         <TextField
-          label="Tel"
+          label={t("Tel")}
           variant="outlined"
           fullWidth
           value={tel}
@@ -196,13 +196,13 @@ export default function SpaceForm({
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Box sx={{ display: "flex", gap: "16px" }}>
             <TimePicker
-              label="Open Time"
+              label={t("OpenTime")}
               value={openTime}
               onChange={(newValue) => setOpenTime(newValue)}
               sx={{ width: "50%" }}
             />
             <TimePicker
-              label="Close Time"
+              label={t("CloseTime")}
               value={closeTime}
               onChange={(newValue) => setCloseTime(newValue)}
               sx={{ width: "50%" }}
@@ -221,7 +221,7 @@ export default function SpaceForm({
             variant="contained"
             sx={{ backgroundColor: "green", color: "white" }}
           >
-            {submitLabel}
+            {t("Create")}{" "}
           </Button>
         </Box>
       </Box>
