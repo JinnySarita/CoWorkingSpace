@@ -30,21 +30,13 @@ export default function SpaceCard({
       <Card
         variant="elevation"
         sx={{
-          width: "379px",
-          borderRadius: "16px",
+          width: "280px",
           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
           overflow: "hidden",
         }}
       >
-        {/* Media at the top */}
-        <CardMedia
-          component="img"
-          height="200"
-          image={imgUrl} // Dynamic image from props
-          alt={title} // Dynamic alt text for accessibility
-        />
+        <CardMedia component="img" height="200" image={imgUrl} alt={title} />
 
-        {/* Content at the bottom */}
         <CardContent>
           <Typography variant="h6" gutterBottom>
             {title}

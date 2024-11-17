@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import getCoWorkingSpaces from "@/libs/getCoWorkingSpaces";
 import SpaceCard from "../../../components/space/SpaceCard";
-import { CircularProgress, Box } from "@mui/material";
+import { CircularProgress, Box, Pagination } from "@mui/material";
 
 type Space = {
   id: string;
@@ -15,6 +15,8 @@ type Space = {
 export default function Spaces() {
   const [loading, setLoading] = useState(true);
   const [spaces, setSpaces] = useState<Space[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const spacesPerPage = 8;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,19 +56,45 @@ export default function Spaces() {
     );
   }
 
+  // Calculate the total number of pages
+  const totalPages = Math.ceil(spaces.length / spacesPerPage);
+
+  // Get the spaces to display for the current page
+  const displayedSpaces = spaces.slice(
+    (currentPage - 1) * spacesPerPage,
+    currentPage * spacesPerPage
+  );
+
+  const handlePageChange = (
+    event: React.ChangeEvent<unknown>,
+    page: number
+  ) => {
+    setCurrentPage(page);
+  };
+
   return (
     <Box
       sx={{
         display: "flex",
-        flexWrap: "wrap",
+        // flexWrap: "wrap",
+        flexDirection: "column",
         gap: "16px",
         justifyContent: "center",
         padding: "16px",
+        alignItems: "center",
       }}
     >
-      {spaces.map((space) => {
-        console.log("space.picture", space.picture); // Log the image URL
-        return (
+      {/* Space Cards */}
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "32px",
+          justifyContent: "center",
+          marginBottom: "32px",
+        }}
+      >
+        {displayedSpaces.map((space) => (
           <SpaceCard
             key={space.id}
             imgUrl={space.picture}
@@ -74,8 +102,16 @@ export default function Spaces() {
             detail={`${space.address}`}
             tel={space.tel}
           />
-        );
-      })}
+        ))}
+      </Box>
+
+      {/* Pagination */}
+      <Pagination
+        count={totalPages}
+        page={currentPage}
+        onChange={handlePageChange}
+        color="primary"
+      />
     </Box>
   );
 }
