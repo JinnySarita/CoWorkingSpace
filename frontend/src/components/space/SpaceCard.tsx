@@ -30,7 +30,7 @@ export default function SpaceCard({
       <Card
         variant="elevation"
         sx={{
-          width: "280px",
+          width: "379px",
           boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
           overflow: "hidden",
         }}

@@ -2,7 +2,15 @@
 import { useEffect, useState } from "react";
 import getCoWorkingSpaces from "@/libs/getCoWorkingSpaces";
 import SpaceCard from "../../../components/space/SpaceCard";
-import { CircularProgress, Box, Pagination } from "@mui/material";
+import {
+  CircularProgress,
+  Box,
+  Pagination,
+  Typography,
+  Button,
+} from "@mui/material";
+import getUserProfile from "@/libs/getUserProfile";
+import { useTranslations } from "next-intl";
 
 type Space = {
   id: string;
@@ -12,11 +20,13 @@ type Space = {
   picture: string;
 };
 
-export default function Spaces() {
+export default async function Spaces() {
   const [loading, setLoading] = useState(true);
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const spacesPerPage = 8;
+
+  const t = useTranslations("spaces.explore");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,6 +94,21 @@ export default function Spaces() {
         alignItems: "center",
       }}
     >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center", // Vertically center the items
+          width: "100%",
+          marginBottom: "32px",
+        }}
+      >
+        <Typography variant="h4">{t("Explore-Co-Working-Spaces")}</Typography>
+        <Button variant="contained" color="primary">
+          + {t("Create Co-working Space")}
+        </Button>
+      </Box>
       {/* Space Cards */}
       <Box
         sx={{

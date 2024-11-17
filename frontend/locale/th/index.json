@@ -70,5 +70,11 @@
       "delete": "ลบ",
       "error-deleting-reservation": "เกิดข้อผิดพลาดในการลบการจอง"
     }
+  },
+  "spaces": {
+    "explore": {
+      "Explore-Co-Working-Spaces": "สำรวจพื้นที่ทำงาน",
+      "Create Co-working Space": "เพิ่มพื้นที่ทำงาน"
+    }
   }
 }
