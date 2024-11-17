@@ -9,12 +9,17 @@ import {
   IconButton,
   CircularProgress,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
 import { useTranslations } from "next-intl";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function SpaceDetailPage({
   params,
@@ -29,8 +34,10 @@ export default function SpaceDetailPage({
     tel: string;
   } | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const session = useSession();
   const t = useTranslations("spaces.get");
+  const router = useRouter();
 
   useEffect(() => {
     const fetchSpaceData = async () => {
@@ -78,6 +85,28 @@ export default function SpaceDetailPage({
     );
   }
 
+  const handleDialogOpen = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    handleDialogClose();
+    await handleDelete();
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteSpace(session.data?.user.token!, params.sid);
+      router.push("/spaces");
+    } catch (error) {
+      console.error("Failed to delete space:", error);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -106,13 +135,31 @@ export default function SpaceDetailPage({
             >
               {t("edit")}
             </Button>
+
             <Button
               variant="contained"
               color="error"
-              //   onClick={() => console.log("Delete logic here")}
+              onClick={handleDialogOpen}
             >
               {t("delete")}
             </Button>
+            <Dialog
+              open={isDialogOpen}
+              onClose={handleDialogClose}
+              aria-labelledby="delete-confirmation-title"
+            >
+              <DialogTitle id="delete-confirmation-title">
+                {t("confirm-delete-title")}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleDialogClose} color="primary">
+                  {t("cancel")}
+                </Button>
+                <Button onClick={handleConfirmDelete} color="error">
+                  {t("delete")}
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Box>
         )}
       </Box>

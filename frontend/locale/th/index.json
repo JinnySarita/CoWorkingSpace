@@ -92,7 +92,10 @@
     "get":{
       "make-reservation":"สร้างการจอง",
       "edit":"แก้ไข",
-      "delete":"ลบ"
+      "delete":"ลบ",
+      "cancel":"ยกเลิก",
+      "confirm-delete-title":"คุณแน่ใจใช่ไหมว่าต้องการลบพท้นที่ทำงานนี้"
+
     }
   }
 }
