@@ -130,7 +130,7 @@ export default function Spaces() {
             color="primary"
             onClick={() => router.push("/spaces/create")}
           >
-            + {t("Create Co-working Space")}
+            + {t("Create-Co-working Space")}
           </Button>
         )}
       </Box>

@@ -74,7 +74,18 @@
   "spaces": {
     "explore": {
       "Explore-Co-Working-Spaces": "สำรวจพื้นที่ทำงาน",
-      "Create Co-working Space": "เพิ่มพื้นที่ทำงาน"
+      "Create-Co-working Space": "เพิ่มพื้นที่ทำงาน"
+    },
+    "create":{
+      "Create-New-Co-working-Space": "สร้างพื้นที่ทำงานใหม่",
+      "information": "ข้อมูลพื้นที่ทำงาน",
+      "Name": "ชื่อ",
+      "Picture-URL": "URL ของรูปภาพ",
+      "Province": "จังหวัด",
+      "Postal-Code": "รหัสไปรษณีย์",
+      "Tel": "เบอร์โทรศัพท์",
+      "OpenTime": "เวลาเปิด",
+      "CloseTime": "เวลาปิด"
     }
   }
 }

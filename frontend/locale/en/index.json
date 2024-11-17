@@ -74,6 +74,17 @@
   "spaces": {
     "explore": {
       "Explore-Co-Working-Spaces": "Explore Co-Working Spaces",
-      "Create Co-working Space": "Create Co-Working Space"
+      "Create-Co-working Space": "Create Co-Working Space"
+    },
+    "create":{
+      "Create-New-Co-working-Space": "Create a New Co-working Space",
+      "information": "Enter Co-Working Space Information",
+      "Name": "Name",
+      "Picture-URL": "Picture URL",
+      "Province": "Province",
+      "Postal-Code": "Postal Code",
+      "Tel": "Tel",
+      "OpenTime": "Open Time",
+      "CloseTime": "Close Time"
     }
 }}
