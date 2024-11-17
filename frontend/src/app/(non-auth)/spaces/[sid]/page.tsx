@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import getCoWorkingSpace from "@/libs/getCoWorkingSpace";
+import deleteSpace from "@/libs/deleteSpace";
 import {
   Box,
   Typography,
@@ -9,11 +10,11 @@ import {
   CircularProgress,
   Button,
 } from "@mui/material";
-import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhoneIcon from "@mui/icons-material/Phone";
+import { useSession } from "next-auth/react";
 
 export default function SpaceDetailPage({
   params,
@@ -28,10 +29,8 @@ export default function SpaceDetailPage({
     tel: string;
   } | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const session = useSession();
   const t = useTranslations("spaces.get");
-
-  const router = useRouter();
 
   useEffect(() => {
     const fetchSpaceData = async () => {
@@ -85,7 +84,6 @@ export default function SpaceDetailPage({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        margin: "0 auto",
         gap: "32px",
       }}
     >
@@ -93,20 +91,40 @@ export default function SpaceDetailPage({
         sx={{
           display: "flex",
           flexDirection: "row",
-          //   alignItems: "center",
-          margin: "0 auto",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "100%",
         }}
       >
         <Typography variant="h4">{spaceData.name}</Typography>
+        {session.data?.user.role === "admin" && (
+          <Box sx={{ display: "flex", gap: "16px" }}>
+            <Button
+              variant="outlined"
+              color="primary"
+              //   onClick={() => router.push(`/spaces/edit/${params.sid}`)}
+            >
+              {t("edit")}
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              //   onClick={() => console.log("Delete logic here")}
+            >
+              {t("delete")}
+            </Button>
+          </Box>
+        )}
       </Box>
       <Box
         sx={{
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          margin: "0 auto",
           padding: "16px",
           gap: "64px",
+          width: "100%",
+          justifyContent: "space-between",
         }}
       >
         {/* Image Section */}
@@ -129,7 +147,7 @@ export default function SpaceDetailPage({
             display: "flex",
             flexDirection: "column",
             gap: "16px",
-            width: "100%",
+            width: "640px",
           }}
         >
           {/* Operating Hours */}
@@ -158,7 +176,7 @@ export default function SpaceDetailPage({
           <Button
             variant="contained"
             color="primary"
-            onClick={() => router.push("/spaces/create")}
+            href="/reservations/create"
           >
             {t("make-reservation")}
           </Button>

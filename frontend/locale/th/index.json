@@ -90,7 +90,9 @@
       "Create":"สร้างการจอง"
     },
     "get":{
-      "make-reservation":"สร้างการจอง"
+      "make-reservation":"สร้างการจอง",
+      "edit":"แก้ไข",
+      "delete":"ลบ"
     }
   }
 }

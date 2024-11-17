@@ -90,7 +90,10 @@
       "Create": "Create"
     },
     "get":{
-      "make-reservation":"Make Reservation"
+      "make-reservation":"Make Reservation",
+      "edit":"Edit",
+      "delete":"Delete"
+
     }
   }
 }
