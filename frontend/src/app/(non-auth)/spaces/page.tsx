@@ -6,7 +6,6 @@ import getUserProfile from "@/libs/getUserProfile";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { SessionInterface } from "../../../../interface";
 import SpaceList from "@/components/space/SpaceList";
 import PaginationControl from "@/components/space/PaginationControl";
 
@@ -22,9 +21,7 @@ export default function Spaces() {
   const [loading, setLoading] = useState(true);
   const [spaces, setSpaces] = useState<Space[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [userRole, setUserRole] = useState<string | null>(null);
-  const { data, status }: { data: SessionInterface | null; status: string } =
-    useSession();
+  const session = useSession();
 
   const t = useTranslations("spaces.explore");
 
@@ -50,23 +47,8 @@ export default function Spaces() {
       }
     };
 
-    const fetchUserProfile = async (token: string) => {
-      try {
-        const userProfile = await getUserProfile(token);
-        setUserRole(userProfile.data.role);
-      } catch (error) {
-        console.error("Failed to fetch user profile:", error);
-      }
-    };
-
-    // Fetch user data if session is authenticated
-    if (status === "authenticated" && data) {
-      const { user } = data;
-      fetchUserProfile(user.token); // Pass token to fetch user profile
-    }
-
-    fetchSpaces(); // Fetch spaces on load
-  }, [data, status]); // Dependency array ensures effect runs when session status/data changes
+    fetchSpaces();
+  }, []);
 
   if (loading) {
     return (
@@ -122,7 +104,7 @@ export default function Spaces() {
         }}
       >
         <Typography variant="h4">{t("Explore-Co-Working-Spaces")}</Typography>
-        {userRole === "admin" && (
+        {session.data?.user.role === "admin" && (
           <Button
             variant="contained"
             color="primary"

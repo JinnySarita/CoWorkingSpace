@@ -31,11 +31,6 @@ export default function Create() {
         formData.tel,
         formData.pictureUrl
       );
-      if (response.success) {
-        console.log("Space created successfully!");
-      } else {
-        console.error("Failed to create space:", response);
-      }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
