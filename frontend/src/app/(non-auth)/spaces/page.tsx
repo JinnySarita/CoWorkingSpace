@@ -108,7 +108,6 @@ export default function Spaces() {
         flexDirection: "column",
         gap: "16px",
         justifyContent: "center",
-        padding: "16px",
         alignItems: "center",
       }}
     >
@@ -122,8 +121,6 @@ export default function Spaces() {
           marginBottom: "32px",
         }}
       >
-        <Typography variant="h4">{t("Explore-Co-Working-Spaces")}</Typography>
-
         {userRole === "admin" && (
           <Button
             variant="contained"
