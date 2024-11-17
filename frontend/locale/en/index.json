@@ -81,10 +81,12 @@
       "information": "Enter Co-Working Space Information",
       "Name": "Name",
       "Picture-URL": "Picture URL",
+      "Address": "Address",
       "Province": "Province",
       "Postal-Code": "Postal Code",
       "Tel": "Tel",
       "OpenTime": "Open Time",
-      "CloseTime": "Close Time"
+      "CloseTime": "Close Time",
+      "Create": "Create"
     }
 }}

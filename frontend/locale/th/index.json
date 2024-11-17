@@ -81,11 +81,13 @@
       "information": "ข้อมูลพื้นที่ทำงาน",
       "Name": "ชื่อ",
       "Picture-URL": "URL ของรูปภาพ",
+      "Address": "ที่อยู่",
       "Province": "จังหวัด",
       "Postal-Code": "รหัสไปรษณีย์",
       "Tel": "เบอร์โทรศัพท์",
       "OpenTime": "เวลาเปิด",
-      "CloseTime": "เวลาปิด"
+      "CloseTime": "เวลาปิด",
+      "Create":"สร้างการจอง"
     }
   }
 }
