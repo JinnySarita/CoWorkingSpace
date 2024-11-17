@@ -9,17 +9,14 @@ import {
   IconButton,
   CircularProgress,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
 } from "@mui/material";
-import { useTranslations } from "next-intl";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhoneIcon from "@mui/icons-material/Phone";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import ConfirmationDialog from "@/components/space/ConfirmationDialog";
+import { useTranslations } from "next-intl";
 
 export default function SpaceDetailPage({
   params,
@@ -54,6 +51,15 @@ export default function SpaceDetailPage({
     fetchSpaceData();
   }, [params.sid]);
 
+  const handleDelete = async () => {
+    try {
+      await deleteSpace(session.data?.user.token!, params.sid);
+      router.push("/spaces");
+    } catch (error) {
+      console.error("Failed to delete space:", error);
+    }
+  };
+
   if (loading) {
     return (
       <Box
@@ -84,28 +90,6 @@ export default function SpaceDetailPage({
       </Box>
     );
   }
-
-  const handleDialogOpen = () => {
-    setIsDialogOpen(true);
-  };
-
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-  };
-
-  const handleConfirmDelete = async () => {
-    handleDialogClose();
-    await handleDelete();
-  };
-
-  const handleDelete = async () => {
-    try {
-      await deleteSpace(session.data?.user.token!, params.sid);
-      router.push("/spaces");
-    } catch (error) {
-      console.error("Failed to delete space:", error);
-    }
-  };
 
   return (
     <Box
@@ -139,27 +123,18 @@ export default function SpaceDetailPage({
             <Button
               variant="contained"
               color="error"
-              onClick={handleDialogOpen}
+              onClick={() => setIsDialogOpen(true)}
             >
               {t("delete")}
             </Button>
-            <Dialog
+            <ConfirmationDialog
               open={isDialogOpen}
-              onClose={handleDialogClose}
-              aria-labelledby="delete-confirmation-title"
-            >
-              <DialogTitle id="delete-confirmation-title">
-                {t("confirm-delete-title")}
-              </DialogTitle>
-              <DialogActions>
-                <Button onClick={handleDialogClose} color="primary">
-                  {t("cancel")}
-                </Button>
-                <Button onClick={handleConfirmDelete} color="error">
-                  {t("delete")}
-                </Button>
-              </DialogActions>
-            </Dialog>
+              title={t("confirm-delete-title")}
+              onClose={() => setIsDialogOpen(false)}
+              onConfirm={handleDelete}
+              confirmLabel={t("delete")}
+              cancelLabel={t("cancel")}
+            />
           </Box>
         )}
       </Box>
