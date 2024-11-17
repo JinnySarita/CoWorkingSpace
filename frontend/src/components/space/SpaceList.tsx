@@ -32,6 +32,7 @@ export default function SpaceList({ spaces }: SpaceListProps) {
           title={space.name}
           detail={`${space.address}`}
           tel={space.tel}
+          id={space.id}
         />
       ))}
     </Box>

@@ -88,5 +88,9 @@
       "OpenTime": "Open Time",
       "CloseTime": "Close Time",
       "Create": "Create"
+    },
+    "get":{
+      "make-reservation":"Make Reservation"
     }
-}}
+  }
+}

@@ -88,6 +88,9 @@
       "OpenTime": "เวลาเปิด",
       "CloseTime": "เวลาปิด",
       "Create":"สร้างการจอง"
+    },
+    "get":{
+      "make-reservation":"สร้างการจอง"
     }
   }
 }

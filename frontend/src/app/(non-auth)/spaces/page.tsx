@@ -121,6 +121,7 @@ export default function Spaces() {
           marginBottom: "32px",
         }}
       >
+        <Typography variant="h4">{t("Explore-Co-Working-Spaces")}</Typography>
         {userRole === "admin" && (
           <Button
             variant="contained"
