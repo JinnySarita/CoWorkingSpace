@@ -1,4 +1,5 @@
 export default async function postSpace(
+  token: string,
   name: string,
   address: string,
   operatingHours: string,
@@ -14,6 +15,7 @@ export default async function postSpace(
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           name,
@@ -26,10 +28,20 @@ export default async function postSpace(
         }),
       }
     );
-    const data = await response.json();
+    const responseBody = await response.json();
 
-    return data;
+    if (!response.ok) {
+      // Use the parsed responseBody for error handling if needed
+      throw new Error(
+        `Error: ${response.status} - ${
+          responseBody.message || response.statusText
+        }`
+      );
+    }
+
+    return responseBody; // Return the parsed JSON
   } catch (error) {
+    console.error("Error posting data:", error);
     throw new Error("Error posting data");
   }
 }
