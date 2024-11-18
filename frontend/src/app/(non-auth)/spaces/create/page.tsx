@@ -5,10 +5,12 @@ import { useTranslations } from "next-intl";
 import { Box, Typography } from "@mui/material";
 import SpaceForm from "@/components/create_edit_space/SpaceForm";
 import postSpace from "@/libs/postCoWokingSpace";
+import { useRouter } from "next/navigation";
 
 export default function Create() {
   const t = useTranslations("spaces.create");
   const session = useSession();
+  const router = useRouter();
 
   // Submit handler for the SpaceForm
   const handleCreate = async (formData: {
@@ -31,6 +33,9 @@ export default function Create() {
         formData.tel,
         formData.pictureUrl
       );
+      if (response.success) {
+        router.push("/spaces");
+      }
     } catch (error) {
       console.error("Error submitting form:", error);
     }
