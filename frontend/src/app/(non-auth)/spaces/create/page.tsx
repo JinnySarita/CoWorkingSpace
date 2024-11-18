@@ -49,7 +49,6 @@ export default function Create() {
         gap: "16px",
         padding: "16px",
         justifyContent: "center",
-        maxWidth: "960px",
       }}
     >
       <Box>
