@@ -55,7 +55,7 @@ export default function Create() {
         <Typography variant="h4">{t("Create-New-Co-working-Space")}</Typography>
       </Box>
       <Box sx={{ marginBottom: "32px" }}>
-        <SpaceForm onSubmit={handleCreate} submitLabel={t("Create")} />
+        <SpaceForm onSubmit={handleCreate} submitLabel="Create" />
       </Box>
     </Box>
   );
