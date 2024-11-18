@@ -87,7 +87,8 @@
       "Tel": "Tel",
       "OpenTime": "Open Time",
       "CloseTime": "Close Time",
-      "Create": "Create"
+      "Create": "Create",
+      "Update": "Update"
     },
     "get":{
       "make-reservation":"Make Reservation",

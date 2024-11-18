@@ -216,12 +216,8 @@ export default function SpaceForm({
             marginTop: "16px",
           }}
         >
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ backgroundColor: "green", color: "white" }}
-          >
-            {t("Create")}{" "}
+          <Button type="submit" variant="contained" color="primary">
+            {t(submitLabel)}
           </Button>
         </Box>
       </Box>

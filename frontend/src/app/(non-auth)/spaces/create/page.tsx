@@ -4,7 +4,7 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { Box, Typography } from "@mui/material";
 import SpaceForm from "@/components/create_edit_space/SpaceForm";
-import postSpace from "@/libs/postSpace";
+import postSpace from "@/libs/postCoWokingSpace";
 
 export default function Create() {
   const t = useTranslations("spaces.create");

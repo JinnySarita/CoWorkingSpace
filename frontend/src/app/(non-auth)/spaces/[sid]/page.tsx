@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import getCoWorkingSpace from "@/libs/getCoWorkingSpace";
-import deleteSpace from "@/libs/deleteSpace";
+import deleteSpace from "@/libs/deleteCoWokingSpace";
 import {
   Box,
   Typography,
@@ -118,7 +118,7 @@ export default function SpaceDetailPage({
               variant="outlined"
               color="primary"
               startIcon={<EditIcon />}
-              //   onClick={() => router.push(`/spaces/edit/${params.sid}`)}
+              onClick={() => router.push(`/spaces/${params.sid}/edit`)}
             >
               {t("edit")}
             </Button>

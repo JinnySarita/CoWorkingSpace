@@ -7,7 +7,6 @@ export default async function getCoWorkingSpace(id: string) {
     const data = await response.json();
 
     const coWorkingSpaces = data.data;
-    console.log("coWorkingSpaces", coWorkingSpaces);
     return data;
   } catch (error) {
     throw new Error("Error fetching data");
