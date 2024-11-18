@@ -13,6 +13,8 @@ import {
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhoneIcon from "@mui/icons-material/Phone";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ConfirmationDialog from "@/components/space/ConfirmationDialog";
@@ -115,6 +117,7 @@ export default function SpaceDetailPage({
             <Button
               variant="outlined"
               color="primary"
+              startIcon={<EditIcon />}
               //   onClick={() => router.push(`/spaces/edit/${params.sid}`)}
             >
               {t("edit")}
@@ -123,6 +126,7 @@ export default function SpaceDetailPage({
             <Button
               variant="contained"
               color="error"
+              startIcon={<DeleteIcon />}
               onClick={() => setIsDialogOpen(true)}
             >
               {t("delete")}
