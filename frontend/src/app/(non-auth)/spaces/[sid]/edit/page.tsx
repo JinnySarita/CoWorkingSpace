@@ -32,18 +32,21 @@ export default function EditSpacePage({ params }: { params: { sid: string } }) {
 
         let openTime, closeTime;
 
+        // Check for the special "24 Hours" case
         if (data.operatingHours === "24 Hours") {
-          openTime = dayjs("2022-04-17T00:00"); // 12:00 AM
-          closeTime = dayjs("2022-04-17T23:59"); // 11:59 PM
+          openTime = dayjs("2022-04-17T00:00"); // 00:00
+          closeTime = dayjs("2022-04-17T23:59"); // 23:59
         } else {
+          // Handle regular 24-hour time format without AM/PM
           [openTime, closeTime] = data.operatingHours
             .split(" - ")
-            .map((time: string) =>
-              dayjs(`2022-04-17T${convertTo24HourFormat(time)}`)
-            );
+            .map((time: string) => dayjs(`2022-04-17T${time}`));
         }
 
-        console.log("Open time:", openTime.toISOString());
+        // Ensure both openTime and closeTime are valid dayjs objects
+        if (!openTime.isValid() || !closeTime.isValid()) {
+          throw new Error("Invalid time format received.");
+        }
 
         setInitialData({
           name: data.name,
@@ -64,29 +67,6 @@ export default function EditSpacePage({ params }: { params: { sid: string } }) {
 
     fetchData();
   }, [params.sid]);
-
-  const convertTo24HourFormat = (time: string): string => {
-    time = time.replace(".", ":");
-
-    console.log("Converting time", time);
-    const match = time.match(/(\d{1,2}):(\d{2})\s(AM|PM)/i);
-
-    console.log("match", match);
-    if (!match) {
-      throw new Error(`Invalid time format: ${time}`);
-    }
-
-    const hour = match[1];
-    const minute = match[2];
-    const period = match[3];
-    let formattedHour = parseInt(hour!, 10);
-    if (period.toUpperCase() === "PM" && formattedHour !== 12)
-      formattedHour += 12;
-    if (period.toUpperCase() === "AM" && formattedHour === 12)
-      formattedHour = 0;
-
-    return `${formattedHour.toString().padStart(2, "0")}:${minute}`;
-  };
 
   const handleUpdate = async (data: {
     name: string;

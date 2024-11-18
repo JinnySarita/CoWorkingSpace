@@ -116,7 +116,7 @@ export default function SpaceForm({
       openTime?.isSame(dayjs("2022-04-17T00:00")) &&
       closeTime?.isSame(dayjs("2022-04-17T23:59"))
     ) {
-      time = "24Hours"; // Use 24Hours if no time is selected
+      time = "24 Hours"; // Use 24 Hours if no time is selected
     } else {
       // Convert Dayjs to string in HH:mm format for both open and close time
       const formattedOpenTime = openTime?.format("HH:mm");
@@ -124,7 +124,6 @@ export default function SpaceForm({
       time = `${formattedOpenTime} - ${formattedCloseTime}`; // Format as "HH:mm - HH:mm"
     }
 
-    console.log("time", time); // Make sure time is correct
     onSubmit({ name, pictureUrl, address, province, postalCode, tel, time });
   };
 
@@ -207,7 +206,9 @@ export default function SpaceForm({
             <TimePicker
               label={t("CloseTime")}
               value={closeTime}
-              onChange={(newValue) => setCloseTime(newValue)}
+              onChange={(newValue) => {
+                setCloseTime(newValue);
+              }}
               sx={{ width: "50%" }}
               ampm={false} // Ensures 24-hour time format
             />
