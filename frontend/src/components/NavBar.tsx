@@ -44,7 +44,7 @@ export default function NavBar() {
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
         <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
-          <Button variant="text" href="spaces">
+          <Button variant="text" href="/spaces">
             {t("co-working-space")}
           </Button>
           {session.data?.user ? (
