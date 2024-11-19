@@ -148,7 +148,6 @@ export default function SpaceDetailPage({
         sx={{
           display: "flex",
           flexDirection: "row",
-          alignItems: "center",
           padding: "16px",
           gap: "64px",
           width: "100%",
