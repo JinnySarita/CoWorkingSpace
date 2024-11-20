@@ -78,7 +78,7 @@ export default function ReservationForm({
   }, []);
 
   if (loading) {
-    return <CircularProgress />;
+    return <CircularProgress data-testid="loading" />;
   }
 
   const submitHandler = (data: any) => {
@@ -91,10 +91,11 @@ export default function ReservationForm({
       onSubmit={form.handleSubmit(submitHandler)}
     >
       <FormControl className="w-full">
-        <InputLabel id="co-working-space">
+        <InputLabel id="co-working-space" htmlFor="co-working-space">
           {t("co-working-space-label")}
         </InputLabel>
         <Select
+          id="co-working-space"
           label={t("co-working-space-label")}
           {...form.register("coWorkingSpaceID")}
           error={!!form.formState.errors.coWorkingSpaceID}
