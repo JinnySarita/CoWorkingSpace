@@ -113,6 +113,7 @@ export default function Page({
           coWorkingSpaceID={reservation.coworkingspace.id}
           numberOfRooms={reservation.numOfRooms}
           reservationDate={reservation.bookingDate}
+          submitText={t("update")}
         />
         <Snackbar
           open={snackbarOpen}
