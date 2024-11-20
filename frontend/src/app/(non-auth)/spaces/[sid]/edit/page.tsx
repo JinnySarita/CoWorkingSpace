@@ -7,8 +7,10 @@ import { useRouter } from "next/navigation";
 import { CircularProgress, Box, Typography } from "@mui/material";
 import dayjs from "dayjs";
 import { useSession } from "next-auth/react";
+import { useTranslations } from "next-intl";
 
 export default function EditSpacePage({ params }: { params: { sid: string } }) {
+  const t = useTranslations("spaces.edit");
   const [initialData, setInitialData] = useState<null | {
     name: string;
     pictureUrl: string;
@@ -126,10 +128,15 @@ export default function EditSpacePage({ params }: { params: { sid: string } }) {
   }
 
   return (
-    <SpaceForm
-      initialData={initialData}
-      onSubmit={handleUpdate}
-      submitLabel="Update"
-    />
+    <div>
+      <Typography variant="h4" sx={{ marginBottom: "32px" }}>
+        {t("Edit-Co-Working-Space")}
+      </Typography>
+      <SpaceForm
+        initialData={initialData}
+        onSubmit={handleUpdate}
+        submitLabel="Update"
+      />
+    </div>
   );
 }
