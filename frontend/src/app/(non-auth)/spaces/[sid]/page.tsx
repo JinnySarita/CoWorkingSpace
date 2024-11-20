@@ -19,6 +19,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ConfirmationDialog from "@/components/space/ConfirmationDialog";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 export default function SpaceDetailPage({
   params,
@@ -27,7 +28,7 @@ export default function SpaceDetailPage({
 }) {
   const [spaceData, setSpaceData] = useState<{
     name: string;
-    image: string;
+    picture: string;
     operatingHours: string;
     address: string;
     tel: string;
@@ -43,6 +44,7 @@ export default function SpaceDetailPage({
       try {
         const response = await getCoWorkingSpace(params.sid);
         setSpaceData(response.data);
+        console.log("response.data", response.data);
       } catch (error) {
         console.error("Failed to fetch space details:", error);
       } finally {
@@ -146,7 +148,6 @@ export default function SpaceDetailPage({
         sx={{
           display: "flex",
           flexDirection: "row",
-          alignItems: "center",
           padding: "16px",
           gap: "64px",
           width: "100%",
@@ -155,17 +156,23 @@ export default function SpaceDetailPage({
       >
         {/* Image Section */}
         <Box
-          component="img"
-          src={spaceData.image}
-          alt="Space Image"
           sx={{
-            maxWidth: "960px",
-            height: "auto",
-            aspectRatio: "2 / 1",
-            objectFit: "cover",
-            borderRadius: "0px",
+            position: "relative",
+            width: "960px", // Fixed width
+            height: "480px", // Fixed height (maintains 2:1 ratio)
+            overflow: "hidden",
+            borderRadius: "8px",
           }}
-        />
+        >
+          <Image
+            src={spaceData.picture}
+            alt="Space Image"
+            fill
+            className="object-cover"
+            sizes="(max-width: 960px) 100vw, 960px"
+            priority
+          />
+        </Box>
 
         {/* Information Section */}
         <Box
