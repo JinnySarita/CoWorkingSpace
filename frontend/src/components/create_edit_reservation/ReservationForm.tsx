@@ -101,7 +101,13 @@ export default function ReservationForm({
       onSubmit={form.handleSubmit(submitHandler)}
     >
       <FormControl className="w-full">
-        <InputLabel id="co-working-space" htmlFor="co-working-space">
+        <InputLabel
+          id="co-working-space"
+          htmlFor="co-working-space"
+          sx={{
+            color: form.formState.errors.coWorkingSpaceID && "error.main",
+          }}
+        >
           {t("co-working-space-label")}
         </InputLabel>
         <Select
@@ -117,7 +123,11 @@ export default function ReservationForm({
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>
+        <FormHelperText
+          sx={{
+            color: "error.main",
+          }}
+        >
           {form.formState.errors.coWorkingSpaceID?.message}
         </FormHelperText>
       </FormControl>
