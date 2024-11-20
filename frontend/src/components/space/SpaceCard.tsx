@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import CardMedia from "@mui/material/CardMedia";
 import Chip from "@mui/material/Chip";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 interface SpaceCardProps {
   imgUrl: string;
@@ -46,7 +46,22 @@ export default function SpaceCard({
         }}
         onClick={handleCardClick} // Handle click event
       >
-        <CardMedia component="img" height="200" image={imgUrl} alt={title} />
+        <Box
+          sx={{
+            position: "relative",
+            width: "100%",
+            height: "200px", // Set the height for the image container
+          }}
+        >
+          <Image
+            src={imgUrl}
+            alt={title}
+            fill
+            sizes="(max-width: 379px) 100vw, 379px"
+            className="object-cover"
+            style={{ borderTopLeftRadius: "0px", borderTopRightRadius: "0px" }} // Optional inline styling for rounded corners
+          />
+        </Box>
 
         <CardContent>
           <Typography variant="h6" gutterBottom>

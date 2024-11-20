@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import getCoWorkingSpaces from "@/libs/getCoWorkingSpaces";
 import { CircularProgress, Box, Typography, Button } from "@mui/material";
-import getUserProfile from "@/libs/getUserProfile";
 import { useTranslations } from "next-intl";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";

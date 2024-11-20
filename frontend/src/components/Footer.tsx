@@ -7,7 +7,7 @@ export default function Footer() {
       className="w-full flex flex-row gap-4 p-4 justify-center"
       sx={{ bgcolor: "primary.main", color: "white" }}
     >
-      <LanguageSwitcher />
+      <LanguageSwitcher className="" />
     </Box>
   );
 }
