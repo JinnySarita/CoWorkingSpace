@@ -44,7 +44,6 @@ export default function SpaceDetailPage({
       try {
         const response = await getCoWorkingSpace(params.sid);
         setSpaceData(response.data);
-        console.log("response.data", response.data);
       } catch (error) {
         console.error("Failed to fetch space details:", error);
       } finally {
@@ -117,6 +116,7 @@ export default function SpaceDetailPage({
         {session.data?.user.role === "admin" && (
           <Box sx={{ display: "flex", gap: "16px" }}>
             <Button
+              name="edit-coworkingspace-button"
               variant="outlined"
               color="primary"
               startIcon={<EditIcon />}
@@ -126,6 +126,7 @@ export default function SpaceDetailPage({
             </Button>
 
             <Button
+              name="delete-coworkingspace-button"
               variant="contained"
               color="error"
               startIcon={<DeleteIcon />}
