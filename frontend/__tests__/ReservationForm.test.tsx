@@ -14,10 +14,23 @@ jest.mock("next/navigation", () => ({
 }));
 
 const json = {
-  "co-working-space-label": "Co-Working Space",
+  "create-title": "Create Reservation",
+  "create-description": "Enter the details of your reservation",
+  "edit-title": "Edit Reservation",
+  "edit-description": "Edit the details of your reservation",
+  "co-working-space-label": "Co-working Space",
+  "co-working-space-required-error": "Co-working space is required",
   "no-of-rooms-label": "No. of Rooms",
+  "no-of-rooms-required-error": "No. of rooms is required",
+  "no-of-rooms-range-error": "No. of rooms must be between 1 and 3",
   "reserved-date-label": "Reservation Date",
+  "reserved-date-required-error": "Reservation date is required",
+  "reserved-date-range-error": "Reservation date must be later day",
   submit: "Confirm",
+  "error-creating-reservation": "Unable to create reservation",
+  "error-updating-reservation": "Unable to update reservation",
+  delete: "Delete",
+  "error-deleting-reservation": "Unable to delete reservation",
 };
 const mockMessages = new Map(Object.entries(json));
 
@@ -53,7 +66,7 @@ describe("ReservationForm", () => {
     // Wait for form elements to appear after loading
     await waitFor(() => {
       // Check if the form elements are rendered
-      expect(screen.getByLabelText("Co-Working Space")).toBeInTheDocument();
+      expect(screen.getByLabelText("Co-working Space")).toBeInTheDocument();
       expect(screen.getByLabelText("No. of Rooms")).toBeInTheDocument();
       expect(screen.getByLabelText("Reservation Date")).toBeInTheDocument();
     });
@@ -62,7 +75,7 @@ describe("ReservationForm", () => {
     expect(screen.queryByTestId("loading")).not.toBeInTheDocument();
   });
 
-  it("should show red border when submit invalid data", async () => {
+  it("should show error text when submit empty data", async () => {
     render(
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <ReservationForm onSubmit={mockSubmit} />
@@ -74,9 +87,15 @@ describe("ReservationForm", () => {
       screen.getByRole("button", { name: "Confirm" }).click();
     });
 
-    // Wait for input red border to appear
+    // Wait for input error to appear
     await waitFor(() => {
-      // TODO: Check if the input fields have red border
+      expect(
+        screen.getByText("Co-working space is required")
+      ).toBeInTheDocument();
+      expect(screen.getByText("No. of rooms is required")).toBeInTheDocument();
+      expect(
+        screen.getByText("Reservation date is required")
+      ).toBeInTheDocument();
     });
   });
 });

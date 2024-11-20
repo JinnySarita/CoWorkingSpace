@@ -7,6 +7,7 @@ import {
   Button,
   CircularProgress,
   FormControl,
+  FormHelperText,
   InputLabel,
   MenuItem,
   Select,
@@ -41,11 +42,20 @@ export default function ReservationForm({
   const t = useTranslations("reservations.form");
 
   const Schema = z.object({
-    coWorkingSpaceID: z.string().min(1),
-    numberOfRooms: z.number().min(1).max(3),
+    coWorkingSpaceID: z
+      .string()
+      .min(1, { message: t("co-working-space-required-error") }),
+    numberOfRooms: z
+      .number({ invalid_type_error: t("no-of-rooms-required-error") })
+      .min(1, { message: t("no-of-rooms-range-error") })
+      .max(3, { message: t("no-of-rooms-range-error") }),
     reservationDate: z
-      .custom<Dayjs>((val) => dayjs.isDayjs(val) && val.isValid())
-      .refine((val) => val.isAfter(dayjs())),
+      .custom<Dayjs>((val) => dayjs.isDayjs(val) && val.isValid(), {
+        message: t("reserved-date-required-error"),
+      })
+      .refine((val) => val.isAfter(dayjs()), {
+        message: t("reserved-date-range-error"),
+      }),
   });
 
   const form = useForm({
@@ -107,6 +117,9 @@ export default function ReservationForm({
             </MenuItem>
           ))}
         </Select>
+        <FormHelperText>
+          {form.formState.errors.coWorkingSpaceID?.message}
+        </FormHelperText>
       </FormControl>
       <FormControl className="w-full">
         <TextField
@@ -119,6 +132,7 @@ export default function ReservationForm({
             );
           }}
           error={!!form.formState.errors.numberOfRooms}
+          helperText={form.formState.errors.numberOfRooms?.message}
           variant="outlined"
           label={t("no-of-rooms-label")}
         />
@@ -134,6 +148,7 @@ export default function ReservationForm({
               fullWidth: true,
               label: t("reserved-date-label"),
               error: !!form.formState.errors.reservationDate,
+              helperText: form.formState.errors.reservationDate?.message,
             },
           }}
         />
