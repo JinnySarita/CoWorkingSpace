@@ -11,13 +11,13 @@ export default function Home() {
         <MenuCard
           title={t("explore.title")}
           description={t("explore.description")}
-          imgURL={"/menu.webp"}
+          imgURL={"/Menu.webp"}
           to={"/spaces"}
         />
         <MenuCard
           title={t("reserve.title")}
           description={t("reserve.description")}
-          imgURL={"/menu.webp"}
+          imgURL={"/Menu.webp"}
           to={"/reservations/create"}
         />
       </div>
