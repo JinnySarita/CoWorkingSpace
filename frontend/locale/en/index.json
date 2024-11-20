@@ -102,6 +102,10 @@
       "cancel":"Cancel",
       "confirm-delete-title":"Are you sure you want to delete this co-working space?"
 
+    },
+    "edit":{
+      "Edit-Co-Working-Space":"Edit Co-Working Space"
     }
+  
   }
 }
