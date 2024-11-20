@@ -8,7 +8,7 @@ export default function Banner() {
   return (
     <div className="w-full h-96 relative rounded-xl overflow-hidden">
       <Image
-        src="/banner.webp"
+        src="/Banner.webp"
         alt="Banner"
         fill
         priority
