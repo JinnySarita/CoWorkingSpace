@@ -31,6 +31,7 @@ interface ReservationFormProps {
     numberOfRooms: number;
     reservationDate: Dayjs | null;
   }) => void;
+  submitText: string;
 }
 
 export default function ReservationForm({
@@ -38,6 +39,7 @@ export default function ReservationForm({
   numberOfRooms,
   reservationDate,
   onSubmit,
+  submitText,
 }: ReservationFormProps) {
   const t = useTranslations("reservations.form");
 
@@ -163,9 +165,11 @@ export default function ReservationForm({
           }}
         />
       </LocalizationProvider>
-      <Button type="submit" variant="contained">
-        {t("submit")}
-      </Button>
+      <div className="flex justify-end">
+        <Button type="submit" variant="contained">
+          {submitText}
+        </Button>
+      </div>
     </form>
   );
 }

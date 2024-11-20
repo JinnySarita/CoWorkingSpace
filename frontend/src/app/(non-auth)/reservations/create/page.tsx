@@ -52,7 +52,7 @@ export default function page() {
     <div className="flex flex-col gap-8">
       <Typography variant="h4">{t("create-title")}</Typography>
       <Typography variant="h5">{t("create-description")}</Typography>
-      <ReservationForm onSubmit={handleSubmit} />
+      <ReservationForm onSubmit={handleSubmit} submitText={t("create")} />
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}
